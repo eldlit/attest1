@@ -1,0 +1,83 @@
+<td>
+  <input type="checkbox" ng-model="myVar">
+  </form>
+</td>
+          </tr>
+       </table>
+
+<input type="submit" ng-click="myFunc()" />
+<button ng-click="reset()">Reset!</button>
+<br>
+</form>
+
+<br />
+
+<div ng-show="infoForm">
+
+  <table border="0">
+    <tr>
+      <td>Name: </td>
+      <td>{{firstName + " " + lastName}}</td>
+    </tr>
+    <tr>
+      <td>Date of birth: </td>
+      <td>
+        {{number}}
+      </td>
+    </tr>
+    <tr>
+      <td>Age:  </td>
+      <td>{{hex}}</td>
+      <td><p ng-if="hex >= 2 && hex <= 4">Первая группа</p></td>
+      <td><p ng-if="hex >= 4 && hex <= 5">Вторая группа</p></td>
+      <td> <p ng-if="hex >= 6 && hex <= 7">Третья группа</p></td>
+      <td>
+        <p ng-if="hex > 7">Выпускник</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td>Gender:</td>
+      <td>
+        <p ng-show="myVar">Male</p>
+        <p ng-show="!myVar">Female</p>
+      </td>
+    </tr>
+  </table>
+</div>
+
+
+<script>
+
+  var mainApp = angular.module("mainApp", []);
+
+  mainApp.service('hexafy', function() {
+  this.myFuncc = function (x) {
+  return 2022 - x ;
+  }
+  });
+  mainApp.controller('Controller', function($scope, hexafy) {
+
+  $scope.infoForm = false;
+  $scope.myFunc = function() {
+  $scope.infoForm = !$scope.infoForm;
+  $scope.hex = hexafy.myFuncc($scope.number);
+  };
+
+  $scope.reset = function() {
+  $scope.firstName = "";
+  $scope.lastName = "";
+  $scope.number = "";
+  $scope.myVar="";
+
+
+  }
+  $scope.reset();
+
+  });
+</script>
+
+
+</body>
+</html>
+
